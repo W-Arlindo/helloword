@@ -1,10 +1,14 @@
-class Tarefas
+using System;
+
+namespace Tarefas.Models;
+
+class Tarefa
 {
     public int Id{get; private set;}
     public string Titulo{get; private set;}
     public string Descricao{get; private set;}
 
-    public Tarefas(int id, string titulo, string descricao)
+    public Tarefa(int id, string titulo, string descricao)
     {
         if (verificartitulo(titulo))
         {
