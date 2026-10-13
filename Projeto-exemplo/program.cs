@@ -1,11 +1,12 @@
 using System;
+using Tarefas.Services;
 
-namespace Program;
+namespace Tarefas;
 
 class Programa
 {
     static void Main()
     {
-        Console.WriteLine("Primeiro programa versionando codigo");
+        Sistema starefas = new();
     }
 }
