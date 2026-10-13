@@ -8,5 +8,6 @@ class Programa
     static void Main()
     {
         Sistema starefas = new();
+        starefas.CadastrarTarefas();
     }
 }
