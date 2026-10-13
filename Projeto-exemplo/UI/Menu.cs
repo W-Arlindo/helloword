@@ -1,0 +1,18 @@
+using System;
+using Tarefas.Services;
+
+namespace Tarefas.UI;
+
+class MenuSistemaTarefas
+{
+    public string ReceberTitulo()
+    {
+        Console.Write("Titulo da tarefa: ");
+        return Console.ReadLine();
+    }
+    public string ReceberDescricao()
+    {
+        Console.Write("Descricao: ");
+        return Console.ReadLine();
+    }
+}
