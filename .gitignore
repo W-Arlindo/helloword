@@ -1,0 +1,22 @@
+# Arquivos gerados pelo .NET
+bin/
+obj/
+
+# Configurações do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Configurações locais
+*.userosscache
+*.sln.docstates
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Resultados de testes
+TestResults/
+
+# Pacotes NuGet
+*.nupkg
