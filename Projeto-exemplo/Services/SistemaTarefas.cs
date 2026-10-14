@@ -121,7 +121,7 @@ class Sistema
             }
         }
 
-        e=MenuTarefas.EditarTitulo().ToLower()[0];
+        e=MenuTarefas.EditarDescricao().ToLower()[0];
         if(e=='y'|| e == 's')
         {
             foreach(Tarefa tarefa in tarefas)
