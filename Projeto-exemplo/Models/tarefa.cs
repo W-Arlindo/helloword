@@ -28,6 +28,7 @@ class Tarefa
             Descricao=descricao;
         }
     }
+    
     //verificar id
     void verificarid(List<Tarefa> tarefas)
     {
@@ -39,6 +40,7 @@ class Tarefa
             }
         }
     }
+
     //Verifica o Titulo da tarefa
     bool verificartitulo(string t)
     {

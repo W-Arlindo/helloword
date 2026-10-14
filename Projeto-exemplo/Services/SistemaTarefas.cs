@@ -14,9 +14,6 @@ class Sistema
     public void CadastrarTarefas()
     {
         Console.WriteLine("= = = Criando Tarefas = = =");
-        int id=1;
-
-        
 
         adicionarlista(new Tarefa(tarefas,MenuTarefas.ReceberTitulo(), MenuTarefas.ReceberDescricao()));
     }
