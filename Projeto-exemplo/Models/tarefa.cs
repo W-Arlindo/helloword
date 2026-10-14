@@ -8,8 +8,9 @@ class Tarefa
     public string Titulo{get; private set;}
     public string Descricao{get; private set;}
 
-    public Tarefa(int id, string titulo, string descricao)
+    public Tarefa(List<Tarefa> tarefas, string titulo, string descricao)
     {
+        verificarid(tarefas);
         if (verificartitulo(titulo))
         {
             throw new ArgumentException("Titulo invalido!");
@@ -26,7 +27,17 @@ class Tarefa
         {
             Descricao=descricao;
         }
-        Id=id;
+    }
+    //verificar id
+    void verificarid(List<Tarefa> tarefas)
+    {
+        foreach(Tarefa tarefa in tarefas)
+        {
+            if (tarefa.Id >= Id)
+            {
+                Id=tarefa.Id +1;
+            }
+        }
     }
     //Verifica o Titulo da tarefa
     bool verificartitulo(string t)

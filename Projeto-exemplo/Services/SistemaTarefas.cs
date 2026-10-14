@@ -16,15 +16,9 @@ class Sistema
         Console.WriteLine("= = = Criando Tarefas = = =");
         int id=1;
 
-        foreach(Tarefa tarefa in tarefas)
-        {
-            if (tarefa.Id >= id)
-            {
-                id=tarefa.Id +1;
-            }
-        }
+        
 
-        adicionarlista(new Tarefa(id,MenuTarefas.ReceberTitulo(), MenuTarefas.ReceberDescricao()));
+        adicionarlista(new Tarefa(tarefas,MenuTarefas.ReceberTitulo(), MenuTarefas.ReceberDescricao()));
     }
     void adicionarlista(Tarefa t)
     {
