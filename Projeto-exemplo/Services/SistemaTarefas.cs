@@ -99,4 +99,19 @@ class Sistema
             }
         }
     }
+
+    //Excluir tarefa
+    public void ExcluirTarefa()
+    {
+        int id = BuscarTarefas();
+
+        foreach(Tarefa tarefa in tarefas)
+        {
+            if(id == tarefa.Id)
+            {
+                tarefas.Remove(tarefa);
+                Console.WriteLine("\nRemovida com sucesso\n");
+            }
+        }
+    }
 }
