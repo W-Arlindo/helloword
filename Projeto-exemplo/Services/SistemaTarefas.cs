@@ -32,13 +32,22 @@ class Sistema
         }
         else
         {
+            Console.WriteLine("Tarefas concluida!!");
             foreach(Tarefa tarefa in tarefas)
             {
-                Console.WriteLine($"\nId: {tarefa.Id}");
-                Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
                 if (tarefa.Concluida)
                 {
-                    Console.WriteLine($"Tarefa concluida!!");
+                    Console.WriteLine($"\nId: {tarefa.Id}");
+                    Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
+                }
+            }
+            Console.WriteLine("Tarefas pendentes");
+            foreach(Tarefa tarefa in tarefas)
+            {
+                if (!tarefa.Concluida)
+                {
+                    Console.WriteLine($"\nId: {tarefa.Id}");
+                    Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
                 }
             }
         }
