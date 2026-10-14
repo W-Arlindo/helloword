@@ -13,10 +13,6 @@ class Sistema
     public void CadastrarTarefas()
     {
         int id=0;
-        string titulo,descricao;
-
-        titulo = MenuTarefas.ReceberTitulo();
-        descricao = MenuTarefas.ReceberDescricao();
 
         foreach(Tarefa tarefa in tarefas)
         {
@@ -26,7 +22,7 @@ class Sistema
             }
         }
 
-        adicionarlista(new Tarefa(id,titulo, descricao));
+        adicionarlista(new Tarefa(id,MenuTarefas.ReceberTitulo(), MenuTarefas.ReceberDescricao()));
     }
     void adicionarlista(Tarefa t)
     {
