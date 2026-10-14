@@ -14,7 +14,7 @@ class Sistema
     public void CadastrarTarefas()
     {
         Console.WriteLine("= = = Criando Tarefas = = =");
-        int id=0;
+        int id=1;
 
         foreach(Tarefa tarefa in tarefas)
         {
@@ -35,12 +35,48 @@ class Sistema
     public void ListarTarefas()
     {
         Console.WriteLine("= = = Lista de Tarefas = = =");
-        foreach(Tarefa tarefa in tarefas)
+        if(tarefas == null)
         {
-            Console.WriteLine($"Id: {tarefa.Id}");
-            Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
+            Console.WriteLine("Lista vazia!");
+        }
+        else
+        {
+            foreach(Tarefa tarefa in tarefas)
+            {
+                Console.WriteLine($"Id: {tarefa.Id}");
+                Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
+            }
+        }
+    }
+    //Buscar Tarefas pelo id
+    public void BuscarTarefas()
+    {
+        ListarTarefas();
+
+        Tarefa tarefa=null;
+        Console.WriteLine("");
+        int id = MenuTarefas.ReceberId();
+
+        Console.WriteLine("= = = Lista de Tarefas = = =");
+        foreach (Tarefa t in tarefas)
+        {
+            if (id == t.Id)
+            {
+                tarefa = t;
+            }
+            else
+            {
+                id = 0;
+            }
+        }
+        if (id == 0)
+        {
+            Console.WriteLine("Id invalido!");
+        }
+        else
+        {
+            Console.WriteLine($"Titulo: {tarefa.Titulo}");
             Console.WriteLine($"Descricao: \n{tarefa.Descricao}");
-            
         }
     }
 }

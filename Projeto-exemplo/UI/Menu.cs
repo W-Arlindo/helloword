@@ -15,4 +15,9 @@ class MenuSistemaTarefas
         Console.Write("Descricao: ");
         return Console.ReadLine();
     }
+    public int ReceberId()
+    {
+        Console.WriteLine("Id Tarefa: ");
+        return int.Parse(Console.ReadLine());
+    }
 }
