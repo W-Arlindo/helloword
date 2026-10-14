@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.Design.Serialization;
 using Tarefas.Models;
 using Tarefas.UI;
 
@@ -98,6 +99,25 @@ class Sistema
                 _.ConcluirTarefa();
             }
         }
+    }
+
+    //Editar tarefas
+    public void EditarTarefa()
+    {
+        string? titulo, descricao;
+
+        int id = BuscarTarefas();
+        Console.WriteLine("= = = Editar Tarefa = = ="); 
+
+        if((MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's'))
+        {
+            titulo = MenuTarefas.ReceberTitulo();
+        }
+        if((MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's'))
+        {
+            descricao = MenuTarefas.ReceberDescricao();
+        }
+        Console.WriteLine("\nEdicao concluida");
     }
 
     //Excluir tarefa

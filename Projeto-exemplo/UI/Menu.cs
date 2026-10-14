@@ -25,4 +25,9 @@ class MenuSistemaTarefas
         Console.Write("Concluir Tarefa: (s y/n)");
         return Console.ReadLine();
     }
+    public string EditarTitulo()
+    {
+        Console.Write("Editar Titulo: (s y/n)");
+        return Console.ReadLine();
+    }
 }

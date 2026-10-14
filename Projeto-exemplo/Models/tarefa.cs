@@ -69,6 +69,31 @@ class Tarefa
         }
     }
 
+    //Editar titulo
+    public void EditarTitulo(string titulo)
+    {
+        if (verificartitulo(titulo))
+        {
+            throw new ArgumentException("Titulo invalido");
+        }
+        else
+        {
+            Titulo=titulo;
+        }
+    }
+
+    //Editar descricao
+    public void EditarDescricao(string descricao)
+    {
+        if (verificardescricao(descricao))
+        {
+            throw new ArgumentException("Descricao invalida");
+        }
+        else
+        {
+            Descricao=descricao;
+        }
+    }
     //concluir
     public void ConcluirTarefa()
     {
