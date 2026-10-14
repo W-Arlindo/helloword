@@ -31,3 +31,56 @@ class MenuSistemaTarefas
         return Console.ReadLine();
     }
 }
+
+class Menu
+{
+    bool programa=true;
+
+    void menu()
+    {
+        Sistema starefas = new();
+        int op;
+
+        Console.WriteLine("= = = Menu Tarefas = = =");
+        Console.WriteLine("1 - Cadastra Tarefa");
+        Console.WriteLine("2 - Listar Tarefas");
+        Console.WriteLine("3 - Buscar Tarefa");
+        Console.WriteLine("4 - Editar Tarefa");
+        Console.WriteLine("5 - Excluir Tarefa");
+        Console.WriteLine("6 - Marca Tarefa Concluida");
+        Console.WriteLine("0 - Sair");
+
+        if(int.TryParse(Console.ReadLine(), out op))
+        {
+            throw new ArgumentException("Opcao invalida");
+        }
+        switch (op)
+        {
+            case 1:
+                starefas.CadastrarTarefas();
+            break;
+            case 2:
+                starefas.ListarTarefas();
+            break;
+            case 3:
+                starefas.BuscarTarefas();
+            break;
+            case 4:
+                starefas.EditarTarefa();
+            break;
+            case 5:
+                starefas.ExcluirTarefa();
+            break;
+            case 6:
+                starefas.ConcluirTarefa();
+            break;
+            case 0:
+                programa=false;
+            break;
+        }
+    }
+    public bool __init__()
+    {
+        Menu();
+    }
+}

@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.Design.Serialization;
 using Tarefas.Models;
 using Tarefas.UI;
 
@@ -93,7 +92,7 @@ class Sistema
         int id = BuscarTarefas();
 
         Console.WriteLine("= = = Concluir Tarefa = = =");
-        if((MenuTarefas.Conclusao().ToLower()[0]=='y'|| MenuTarefas.Conclusao().ToLower()[0] == 's')){
+        if(MenuTarefas.Conclusao().ToLower()[0]=='y'|| MenuTarefas.Conclusao().ToLower()[0] == 's'){
             foreach (Tarefa _ in tarefas)
             {
                 _.ConcluirTarefa();
@@ -109,11 +108,11 @@ class Sistema
         int id = BuscarTarefas();
         Console.WriteLine("= = = Editar Tarefa = = ="); 
 
-        if((MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's'))
+        if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
         {
             titulo = MenuTarefas.ReceberTitulo();
         }
-        if((MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's'))
+        if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
         {
             descricao = MenuTarefas.ReceberDescricao();
         }
