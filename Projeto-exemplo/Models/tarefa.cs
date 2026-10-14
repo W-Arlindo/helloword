@@ -7,6 +7,7 @@ class Tarefa
     public int Id{get; private set;}
     public string Titulo{get; private set;}
     public string Descricao{get; private set;}
+    public bool Concluida{get; private set;}
 
     public Tarefa(List<Tarefa> tarefas, string titulo, string descricao)
     {
@@ -27,8 +28,9 @@ class Tarefa
         {
             Descricao=descricao;
         }
+        Concluida=false;
     }
-    
+
     //verificar id
     void verificarid(List<Tarefa> tarefas)
     {
@@ -65,5 +67,11 @@ class Tarefa
         {
             return false;
         }
+    }
+
+    //concluir
+    public void ConcluirTarefa()
+    {
+        Concluida=true;
     }
 }

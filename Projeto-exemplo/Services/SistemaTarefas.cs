@@ -34,13 +34,18 @@ class Sistema
         {
             foreach(Tarefa tarefa in tarefas)
             {
-                Console.WriteLine($"Id: {tarefa.Id}");
+                Console.WriteLine($"\nId: {tarefa.Id}");
                 Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
+                if (tarefa.Concluida)
+                {
+                    Console.WriteLine($"Tarefa concluida!!");
+                }
             }
         }
     }
+    
     //Buscar Tarefas pelo id
-    public void BuscarTarefas()
+    public int BuscarTarefas()
     {
         ListarTarefas();
 
@@ -48,7 +53,7 @@ class Sistema
         Console.WriteLine("");
         int id = MenuTarefas.ReceberId();
 
-        Console.WriteLine("= = = Lista de Tarefas = = =");
+        Console.WriteLine("= = = Tarefa = = =");
         foreach (Tarefa t in tarefas)
         {
             if (id == t.Id)
@@ -68,6 +73,21 @@ class Sistema
         {
             Console.WriteLine($"Titulo: {tarefa.Titulo}");
             Console.WriteLine($"Descricao: \n{tarefa.Descricao}");
+        }
+        return id;
+    }
+
+    //concluir tarefa
+    public void ConcluirTarefa()
+    {
+        int id = BuscarTarefas();
+
+        Console.WriteLine("= = = Concluir Tarefa = = =");
+        if((MenuTarefas.Conclusao().ToLower()[0]=='y'|| MenuTarefas.Conclusao().ToLower()[0] == 's')){
+            foreach (Tarefa _ in tarefas)
+            {
+                _.ConcluirTarefa();
+            }
         }
     }
 }

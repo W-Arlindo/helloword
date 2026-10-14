@@ -20,4 +20,9 @@ class MenuSistemaTarefas
         Console.WriteLine("Id Tarefa: ");
         return int.Parse(Console.ReadLine());
     }
+    public string Conclusao()
+    {
+        Console.Write("Concluir Tarefa: (s y/n)");
+        return Console.ReadLine();
+    }
 }
