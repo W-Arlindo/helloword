@@ -81,6 +81,7 @@ class Menu
     }
     public bool __init__()
     {
-        Menu();
+        menu();
+        return programa;
     }
 }
