@@ -10,8 +10,10 @@ class Sistema
 
     List<Tarefa> tarefas = new();
 
+    //Cadastrando tarefas
     public void CadastrarTarefas()
     {
+        Console.WriteLine("= = = Criando Tarefas = = =");
         int id=0;
 
         foreach(Tarefa tarefa in tarefas)
@@ -27,5 +29,18 @@ class Sistema
     void adicionarlista(Tarefa t)
     {
         tarefas.Add(t);
+    }
+
+    //Listar tarefas
+    public void ListarTarefas()
+    {
+        Console.WriteLine("= = = Lista de Tarefas = = =");
+        foreach(Tarefa tarefa in tarefas)
+        {
+            Console.WriteLine($"Id: {tarefa.Id}");
+            Console.WriteLine($"Tarefa: {tarefa.Titulo}\n");
+            Console.WriteLine($"Descricao: \n{tarefa.Descricao}");
+            
+        }
     }
 }
