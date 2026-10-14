@@ -86,9 +86,11 @@ class Sistema
     public void ConcluirTarefa()
     {
         int id = BuscarTarefas();
+        char c;
 
         Console.WriteLine("= = = Concluir Tarefa = = =");
-        if(MenuTarefas.Conclusao().ToLower()[0]=='y'|| MenuTarefas.Conclusao().ToLower()[0] == 's'){
+        c =MenuTarefas.Conclusao().ToLower()[0];
+        if(c=='y'|| c == 's'){
             foreach (Tarefa _ in tarefas)
             {
                 if(id == _.Id)
@@ -102,12 +104,13 @@ class Sistema
     //Editar tarefas
     public void EditarTarefa()
     {
-        string? titulo, descricao;
+        char e;
 
         int id = BuscarTarefas();
         Console.WriteLine("= = = Editar Tarefa = = ="); 
 
-        if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
+        e=MenuTarefas.EditarTitulo().ToLower()[0];
+        if(e=='y'|| e == 's')
         {
             foreach(Tarefa tarefa in tarefas)
             {
@@ -117,7 +120,9 @@ class Sistema
                 }
             }
         }
-        if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
+
+        e=MenuTarefas.EditarTitulo().ToLower()[0];
+        if(e=='y'|| e == 's')
         {
             foreach(Tarefa tarefa in tarefas)
             {

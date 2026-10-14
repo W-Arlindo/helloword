@@ -30,6 +30,11 @@ class MenuSistemaTarefas
         Console.Write("Editar Titulo: (s y/n)");
         return Console.ReadLine();
     }
+    public string EditarDescricao()
+    {
+        Console.Write("Editar Descricao: (s y/n)");
+        return Console.ReadLine();
+    }
 }
 
 class Menu
