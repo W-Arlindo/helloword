@@ -26,7 +26,7 @@ class Sistema
     public void ListarTarefas()
     {
         Console.WriteLine("= = = Lista de Tarefas = = =");
-        if(tarefas == null)
+        if(0 == tarefas.Count)
         {
             Console.WriteLine("Lista vazia!");
         }
@@ -69,12 +69,8 @@ class Sistema
             {
                 tarefa = t;
             }
-            else
-            {
-                id = 0;
-            }
         }
-        if (id == 0)
+        if (tarefa==null)
         {
             Console.WriteLine("Id invalido!");
         }
@@ -95,7 +91,10 @@ class Sistema
         if(MenuTarefas.Conclusao().ToLower()[0]=='y'|| MenuTarefas.Conclusao().ToLower()[0] == 's'){
             foreach (Tarefa _ in tarefas)
             {
-                _.ConcluirTarefa();
+                if(id == _.Id)
+                {
+                    _.ConcluirTarefa();
+                }
             }
         }
     }
@@ -110,12 +109,25 @@ class Sistema
 
         if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
         {
-            titulo = MenuTarefas.ReceberTitulo();
+            foreach(Tarefa tarefa in tarefas)
+            {
+                if (id == tarefa.Id)
+                {
+                    tarefa.EditarTitulo(MenuTarefas.ReceberTitulo());
+                }
+            }
         }
         if(MenuTarefas.EditarTitulo().ToLower()[0]=='y'|| MenuTarefas.EditarTitulo().ToLower()[0] == 's')
         {
-            descricao = MenuTarefas.ReceberDescricao();
+            foreach(Tarefa tarefa in tarefas)
+            {
+                if (id == tarefa.Id)
+                {
+                    tarefa.EditarDescricao(MenuTarefas.ReceberDescricao());
+                }
+            }
         }
+        
         Console.WriteLine("\nEdicao concluida");
     }
 

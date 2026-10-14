@@ -34,11 +34,12 @@ class MenuSistemaTarefas
 
 class Menu
 {
-    bool programa=true;
+    Sistema starefas = new();
 
+    bool programa=true;
+    
     void menu()
-    {
-        Sistema starefas = new();
+    {        
         int op;
 
         Console.WriteLine("= = = Menu Tarefas = = =");
@@ -50,7 +51,7 @@ class Menu
         Console.WriteLine("6 - Marca Tarefa Concluida");
         Console.WriteLine("0 - Sair");
 
-        if(int.TryParse(Console.ReadLine(), out op))
+        if(!int.TryParse(Console.ReadLine(), out op))
         {
             throw new ArgumentException("Opcao invalida");
         }
