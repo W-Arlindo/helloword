@@ -56,4 +56,15 @@ class Cliente
             return true;
         }
     }
+
+    public void AlterarNome(string? n)
+    {
+        if (VerificarNome(n))
+        {
+            Nome = n;
+        }
+        else{
+            return;
+        }
+    }
 }

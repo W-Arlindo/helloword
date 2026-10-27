@@ -42,20 +42,12 @@ app.MapGet("/Cliente/{id}",(int id) =>
 app.MapPut("/Emprestimo/{id}", (int id,string nome) => {
     Emprestimo? emprestimo = sistema.Buscar(id);
 
-    if (emprestimo is null)
-    {
-        return Results.NotFound("Emprestimo nao encontrado!!");
-    }
-
-    try
+    if(emprestimo!=null)
     {
         emprestimo.Cliente.AlterarNome(nome);
-        return Results.Ok(emprestimo);
     }
-    catch (ArgumentException ex)
-    {
-        return Results.BadRequest(ex.Message);
-    }
+
+    return emprestimo;
 });
 
 
