@@ -1,0 +1,76 @@
+using System;
+using MYAPI.Services;
+
+namespace MYAPI.UI;
+
+class Menu
+{
+    SistemaAgiota SisAg = new();
+    
+    bool Programa = true;
+    
+    void MenuInicial(){
+        string? op;
+        
+        Console.WriteLine("= = = MENU = = =");
+        Console.WriteLine("1 - Ver Caderno");
+        Console.WriteLine("2 - Cadastrar Emprestimo");
+        Console.WriteLine("3 - Alterar Nome");
+        Console.WriteLine("4 - Alterar Valor");
+        Console.WriteLine("5 - Pagou o juros");
+        Console.WriteLine("6 - Riscar Nome");
+        Console.WriteLine("0 - Sair");
+        
+        Console.Write("Escolha: ");
+        op = Console.ReadLine();
+        if(string.IsNullOrWhiteSpace(op)){
+            Console.WriteLine("= = = = = =™");
+            Console.WriteLine("Escolher algumas das opcoes");
+            return;
+        }
+        else if(!int.TryParse(op, out int _)){
+            Console.WriteLine("= = = = = =™");
+            Console.WriteLine("Escrita invalida");
+            return;
+        }
+        else if(int.Parse(op) < 0 ||int.Parse(op) > 6){
+            Console.WriteLine("= = = = = =™");
+            Console.WriteLine("Escolha invalida");
+            return;
+        }
+        
+        switch(int.Parse(op)){
+            case 1:
+                SisAg.ListarClientes();
+            break;
+            
+            case 2:
+                SisAg.CadastrarCliente();
+            break;
+            
+            case 3:
+                SisAg.AlterarNomeCliente();
+            break;
+            
+            case 4:
+                SisAg.AlterarValor();
+            break;
+
+            case 5:
+                SisAg.QuitouJuros();
+            break;
+            
+            case 6:
+                SisAg.RiscarNome();
+            break;
+            
+            case 0:
+                Programa = SisAg.FinalizarPrograma();
+            break;
+        }
+    }
+    public bool __init__(){
+        MenuInicial();
+        return Programa;
+    }
+}
