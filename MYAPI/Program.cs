@@ -40,14 +40,32 @@ app.MapGet("/Cliente/{id}",(int id) =>
 
 //Alterar Nome
 app.MapPut("/Emprestimo/{id}", (int id,string nome) => {
+    
+    string erro = "";
+    
+    //Recebe Emprestimo solicitado
     Emprestimo? emprestimo = sistema.Buscar(id);
+    
 
+    //verifica e altera;
     if(emprestimo!=null)
     {
-        emprestimo.Cliente.AlterarNome(nome);
+        emprestimo.Cliente.AlterarNome(nome,out erro);
+
+        
     }
 
-    return emprestimo;
+    
+    //retorna o valor alterado
+    if(erro == "")
+    {
+        return Results.Ok(emprestimo);
+    }
+    else
+    {
+        return Results.NotFound(erro);
+    }
+    
 });
 
 

@@ -16,20 +16,23 @@ class Cliente
     }
 
     //Verificar Nome
-    public bool VerificarNome(string? n)
+    public bool VerificarNome(string? n, out string erro)
     {
         //ver se e um spaco ou null
         if (string.IsNullOrWhiteSpace(n))
         {
+            erro = "Digite algum nome";
             return false;
         }
         //ver se e numero
         else if(double.TryParse(n, out double _)){
+            erro = "Nome nao pode ser apenar numero";
             return false;
         }
         //Retorna verificacao
         else
         {
+            erro = "";
             return true;
         }
     }
@@ -57,13 +60,14 @@ class Cliente
         }
     }
 
-    public void AlterarNome(string? n)
+    public void AlterarNome(string? n, out string erro)
     {
-        if (VerificarNome(n))
+        if (VerificarNome(n, out erro))
         {
             Nome = n;
         }
         else{
+
             return;
         }
     }
