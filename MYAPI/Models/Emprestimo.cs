@@ -4,7 +4,7 @@ namespace MYAPI.Models;
 
 class Emprestimo
 {
-    public static int Caderno { get; private set; } = 0;
+    public static int Contador { get; private set; } = 0;
 
     public enum StatusPagamento { Pendente, Reagendado, Pago }
 
@@ -17,8 +17,8 @@ class Emprestimo
 
     public Emprestimo(Cliente cliente)
     {
-        Caderno++;
-        Id = Caderno;
+        Contador++;
+        Id = Contador;
         Cliente = cliente;
         Status = StatusPagamento.Pendente;
         DataEmprestimo = DateTime.Now;
@@ -75,6 +75,10 @@ class Emprestimo
         }
     }
 
+    public void AddContador(string cont)
+    {
+        Contador = int.Parse(cont);
+    }
     public void AddNumero(string id){
         Id = int.Parse(id);
     }

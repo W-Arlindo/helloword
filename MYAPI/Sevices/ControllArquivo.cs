@@ -31,14 +31,18 @@ class TrazerDados:Dados{
     
     void Estruturar(List<Emprestimo> Emprestimos,string[] arquivoemprestimos)   
     {
-        int save=1;
+        int save=0;
 
         Cliente clientetemp=new("A",1,1);
         Emprestimo EmprestimoTemp = new(clientetemp);
 
-        if(arquivoemprestimos.Length%8==0){
+        if((arquivoemprestimos.Length-1)%8==0){
             foreach (var linha in arquivoemprestimos)
             {
+                if (save == 0)
+                {
+                    EmprestimoTemp.AddContador(linha);
+                }
                 if (save == 9)
                 {
                     save = 1;
@@ -135,6 +139,7 @@ class EnviarArquivo:Dados
     
     void Preparar(List<List<string>> emprestimosS, List<string> arquivo)
     {
+        arquivo.Add(Emprestimo.Contador.ToString());
         foreach (var emprestimo in emprestimosS)
         {
             foreach (string dados in emprestimo)
