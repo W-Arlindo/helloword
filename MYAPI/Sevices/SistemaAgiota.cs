@@ -14,7 +14,6 @@ class SistemaAgiota
         
         emprestimos = entradaarquivo.BuscarArquivo();
 
-        organizarlista();
     }
 
     //Listar Emprestimos
@@ -31,20 +30,6 @@ class SistemaAgiota
         emprestimos.Add(new Emprestimo(cliente));
 
     }
-    
-    void organizarlista()
-    {
-        int index = 1;
-
-        foreach(Emprestimo emprestimo in this.emprestimos)
-        {
-            if (emprestimo.Numero != index)
-            {
-                emprestimo.AddNumero(index.ToString());
-            }
-            index++;
-        }
-    }
 
     //buscar emprestimo pelo id
     internal Emprestimo? Buscar(int id, out string erro)
@@ -53,7 +38,7 @@ class SistemaAgiota
         foreach(Emprestimo emprestimo in emprestimos)
         {
             //verificando id de cada emprestimo
-            if (emprestimo.Numero == id)
+            if (emprestimo.Id == id)
             {
                 erro = "";
                 return emprestimo;
@@ -79,7 +64,6 @@ class SistemaAgiota
                 return;
         }
         
-        emprestimo.OrganizarLista(emprestimos);
     }
 
     //Quitou a divida completa
@@ -100,8 +84,6 @@ class SistemaAgiota
     internal void EnviarArquivo()
     {
         EnviarArquivo enviarArquivo = new();
-
-        organizarlista();
 
         enviarArquivo.Enviar(emprestimos);
 

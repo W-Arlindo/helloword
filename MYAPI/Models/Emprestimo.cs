@@ -8,7 +8,7 @@ class Emprestimo
 
     public enum StatusPagamento { Pendente, Reagendado, Pago }
 
-    public int Numero { get; private set; }
+    public int Id { get; private set; }
     public Cliente Cliente { get; private set; }
     public StatusPagamento Status { get; private set; }
     public DateTime DataEmprestimo {get; private set;}
@@ -18,7 +18,7 @@ class Emprestimo
     public Emprestimo(Cliente cliente)
     {
         Caderno++;
-        Numero = Caderno;
+        Id = Caderno;
         Cliente = cliente;
         Status = StatusPagamento.Pendente;
         DataEmprestimo = DateTime.Now;
@@ -52,22 +52,6 @@ class Emprestimo
             break;
         }
 
-        OrganizarLista(emprestimos);
-
-    }
-
-    public void OrganizarLista(List<Emprestimo> emprestimos)
-    {
-        int i=1;
-        foreach(var e in emprestimos)
-        {
-            if (e.Numero!=i)
-            {
-                e.AddNumero($"{i}");
-            }
-
-            i++;
-        }
     }
 
     public decimal CalcularJuros(){
@@ -91,8 +75,8 @@ class Emprestimo
         }
     }
 
-    public void AddNumero(string numero){
-        Numero = int.Parse(numero);
+    public void AddNumero(string id){
+        Id = int.Parse(id);
     }
     public void AddStatus(string status){
         if (status == StatusPagamento.Pendente.ToString()){

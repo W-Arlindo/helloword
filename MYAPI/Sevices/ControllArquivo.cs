@@ -150,7 +150,7 @@ class EnviarArquivo:Dados
         {
             List<string> e = new List<string>();
 
-            e.Add(emprestimo.Numero.ToString());
+            e.Add(emprestimo.Id.ToString());
             e.Add(emprestimo.Cliente.Nome);
             e.Add(emprestimo.Cliente.Valor.ToString());
             e.Add(emprestimo.Cliente.Juros.ToString());
