@@ -7,7 +7,7 @@ class MenuSistemaAgiota
 {
     internal object Listar(Emprestimo c){
         return new{
-            Numero = c.Numero,
+            Numero = c.Id,
             Nome = c.Cliente.Nome,
             Valor = c.Cliente.Valor,
             Juros = c.Cliente.Juros,
