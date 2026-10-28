@@ -84,6 +84,10 @@ app.MapPut("/Emprestimo/Cliente/AlterarNome/{id}", (int id,string nome) => {
 //Alterar Valor do Emprestimo
 app.MapPut("/Emprestimo/Cliente/AlterarValor/{id}", (int id, decimal valor) =>
 {
+    if (valor <= 0)
+    {
+        return Results.BadRequest("Valor invalido");
+    }
     string erro = "";
 
     //Recebe Emprestimo solicitado
