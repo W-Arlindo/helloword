@@ -42,6 +42,8 @@ class TrazerDados:Dados{
                 if (save == 0)
                 {
                     EmprestimoTemp.AddContador(linha);
+                    save++;
+                    continue;
                 }
                 if (save == 9)
                 {
