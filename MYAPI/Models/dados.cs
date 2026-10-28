@@ -14,14 +14,15 @@ class Cliente
     public decimal Valor { get; private set; }
     public decimal Juros { get; private set; }
 
-    public Cliente(string? nome, decimal valor, decimal juros,out string erro)
+    public Cliente(string? nome, decimal valor, decimal juros)
     {
-        if (VerificarNome(nome,out erro))
+        string erro;
+        if (VerificarNome(nome, out erro))
         {
             Nome = nome;
         }
         else{
-            throw new ArgumentException("Nome invalido");
+            throw new ArgumentException(erro);
         }
 
         if (VerificarNumero(valor,out erro))
@@ -30,7 +31,7 @@ class Cliente
         }
         else
         {
-            throw new ArgumentException("Valor invalido");
+            throw new ArgumentException(erro);
         }
         
         if (VerificarNumero(juros,out erro))
@@ -39,7 +40,7 @@ class Cliente
         }
         else
         {
-            throw new ArgumentException("Juros invalido");
+            throw new ArgumentException(erro);
         }
     }
 
@@ -101,5 +102,15 @@ class Cliente
         else{
             return;
         }
+    }
+
+    public void AddNome(string? nome){
+        Nome = nome;
+    }
+    public void AddValor(string? valor){
+        Valor = decimal.Parse(valor);
+    }
+    public void AddJuros(string? juros){
+        Juros = decimal.Parse(juros);
     }
 }

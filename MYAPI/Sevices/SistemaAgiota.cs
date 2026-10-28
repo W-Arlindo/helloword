@@ -6,108 +6,7 @@ namespace MYAPI.Services;
 
 public class SistemaAgiota
 {
-    /*string caminho = "Emprestimos.txt";
 
-    public SistemaAgiota()
-    {
-        try
-        {
-            Console.Write("Carregando Arquivo");
-            for (int i = 0; i < 3; i++)
-            {
-                Task.Delay(1);
-                Console.Write(". ");
-            }
-
-            CarregarArquivo();
-
-            Console.Clear();
-            Console.WriteLine("Encontrado!!");
-            Task.Delay(063);
-
-            Console.Clear();
-        }
-        catch
-        {
-            Console.WriteLine("Nenhum Programa encontrado");
-            Task.Delay(50);
-            Console.Clear();
-            return;
-        }
-        finally
-        {
-            Console.WriteLine("Programa iniciado.");
-        }
-    }
-
-    MenuSistemaAgiota MenuAgiota = new();
-
-    void CarregarArquivo()
-    {
-        int save = 1;
-
-        if (File.Exists(caminho))
-        {
-            Cliente ClienteTemp = new("a", "1", "1");
-            Emprestimo EmprestimoTemp = new(ClienteTemp);
-
-            string[] Emprestimos = File.ReadAllLines(caminho);
-            foreach (var item in Emprestimos)
-            {
-                if (save == 9)
-                {
-                    save = 1;
-                }
-
-                if (save == 1)
-                {
-                    ClienteTemp = new("a", "1", "1");
-                    EmprestimoTemp = new(ClienteTemp);
-                }
-
-                if (save <= 8)
-                {
-                    switch (save)
-                    {
-                        case 1:
-                            EmprestimoTemp.AddNumero(item);
-                            break;
-
-                        case 2:
-                            EmprestimoTemp.Cliente.AddNome(item);
-                            break;
-
-                        case 3:
-                            EmprestimoTemp.Cliente.AlterarValor(item);
-                            break;
-
-                        case 4:
-                            EmprestimoTemp.Cliente.AddJuros(item);
-                            break;
-
-                        case 5:
-                            EmprestimoTemp.AddStatus(item);
-                            break;
-                        case 6:
-                            EmprestimoTemp.AddDataEmprestimo(item);
-                            break;
-                        case 7:
-                            EmprestimoTemp.AddDataVencimento(item);
-                            break;
-                        case 8:
-                            EmprestimoTemp.AddMesReagendado(item);
-                            break;
-                    }
-                }
-                if ((save % 8) == 0)
-                {
-                    this.emprestimos.Add(EmprestimoTemp);
-                }
-                save++;
-            }
-        }
-    }
-    */
     private List<Emprestimo> emprestimos = new();
 
     //Listar Emprestimos
@@ -118,9 +17,9 @@ public class SistemaAgiota
     }
 
     //add a lista
-    internal void CadastrarCliente(string nome,decimal valor, decimal juros,out string erro)
+    internal void CadastrarCliente(string nome,decimal valor, decimal juros)
     {
-        Cliente cliente = new Cliente(nome,valor,juros,out erro);
+        Cliente cliente = new Cliente(nome,valor,juros);
         emprestimos.Add(new Emprestimo(cliente));
     }
 

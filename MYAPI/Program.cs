@@ -19,19 +19,12 @@ app.MapGet("/Emprestimo", () =>
 //Cadastrar emprestimo
 app.MapPost("/Emprestimo/Cadastrar",(CadastrarCliente cliente) =>
 {
-    string erro ="";
-
     try{
-        sistema.CadastrarCliente(cliente.nome,cliente.valor,cliente.juros,out erro);
+        sistema.CadastrarCliente(cliente.nome,cliente.valor,cliente.juros);
     }
     catch(ArgumentException ex)
     {
         return Results.BadRequest(ex.Message);
-    }
-
-    if (erro != "")
-    {
-        return Results.BadRequest(erro);
     }
     
     return Results.NoContent();
