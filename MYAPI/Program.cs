@@ -10,49 +10,49 @@ MenuSistemaAgiota menuSistemaAgiota = new();
 
 SistemaAgiota sistema = new();
 
-//Cadastrar emprestimo
-app.MapPost("/CadastrarEmprestimo",(Cliente cliente) =>
-{
-    sistema.CadastrarCliente(cliente);
-});
-
 //Listar emprestimo
-app.MapGet("/Emprestimos", () =>
+app.MapGet("/Emprestimo", () =>
 {
     return sistema.ListarEmprestimo();
 });
 
-//Buscar Emprestimo
-app.MapGet("/Cliente/{id}",(int id) =>
+//Cadastrar emprestimo
+app.MapPost("/Emprestimo/Cadastrar",(CadastrarCliente cliente) =>
 {
-    Emprestimo emprestimo = sistema.Buscar(id);
-    if(emprestimo == null)
-    {
-        return Results.NotFound("Emprestimo nao encontrado!!");
+    string erro ="";
+
+    try{
+        sistema.CadastrarCliente(cliente.nome,cliente.valor,cliente.juros,out erro);
     }
-    else
+    catch(ArgumentException ex)
     {
-        return Results.Ok(emprestimo);
-        
-        //return Results.Ok(menuSistemaAgiota.Listar(emprestimo));
+        return Results.BadRequest(ex.Message);
     }
+
+    if (erro != "")
+    {
+        return Results.BadRequest(erro);
+    }
+    
+    return Results.NoContent();
 });
 
-//Alterar Nome
-app.MapPut("/Emprestimo/{id}", (int id,string nome) => {
+//Alterar Nome do cliente 
+app.MapPut("/Emprestimo/Cliente/AlterarNome/{id}", (int id,string nome) => {
     
     string erro = "";
-    
+
     //Recebe Emprestimo solicitado
-    Emprestimo? emprestimo = sistema.Buscar(id);
-    
+    Emprestimo? emprestimo = sistema.Buscar(id,out erro);
 
     //verifica e altera;
     if(emprestimo!=null)
     {
         emprestimo.Cliente.AlterarNome(nome,out erro);
-
-        
+    }
+    else
+    {
+        return Results.NotFound(erro);
     }
 
     
@@ -63,10 +63,135 @@ app.MapPut("/Emprestimo/{id}", (int id,string nome) => {
     }
     else
     {
-        return Results.NotFound(erro);
+        return Results.BadRequest(erro);
     }
     
 });
+
+//Alterar Valor do Emprestimo
+app.MapPut("/Emprestimo/Cliente/AlterarValor/{id}", (int id, decimal valor) =>
+{
+    string erro = "";
+
+    //Recebe Emprestimo solicitado
+    Emprestimo? emprestimo = sistema.Buscar(id,out erro);
+    
+    //verifica e altera;
+    if(emprestimo!=null){
+        emprestimo.Cliente.AlterarValor(valor,out erro);
+    }
+    else
+    {
+        return Results.NotFound(erro);
+    }
+
+
+    //retorna o valor alterado
+    if(erro != "")
+    {
+        return Results.BadRequest(erro);
+    }
+    else
+    {
+        return Results.Ok(emprestimo);
+    }
+
+});
+
+//pagou apenas o juros e reagendou para o proximo mes
+app.MapPost("/Emprestimo/PagouJuros/{id}", (int id) =>
+{
+    string erro = "";
+    Emprestimo? empres = sistema.Buscar(id,out erro);
+
+    if(empres != null)
+    {
+        empres.JurosPago(sistema.ListarEmprestimo(),out erro);
+    }
+    else
+    {
+        return Results.NotFound(erro);
+    }
+
+    if(erro == "")
+    {
+        return Results.Ok(empres);
+    }
+    else
+    {
+        return Results.NotFound(erro);
+    }
+});
+
+//Pago divida completa
+app.MapPost("/Emprestimo/QuitouDivida/{id}", (int id) =>
+{
+    string erro ="";
+    Emprestimo? emprestimo = sistema.Buscar(id, out erro);
+
+    if (emprestimo == null)
+    {
+        return Results.NotFound(erro);
+    }
+    else
+    {
+        sistema.DividaPaga(emprestimo, out erro);
+    }
+
+    if (erro == "")
+    {
+        return Results.NoContent();
+    }
+    else
+    {
+        return Results.BadRequest(erro);
+    }
+});
+
+//Riscar nome da lista
+app.MapDelete("/Emprestimo/Delete/{id}", (int id) =>
+{
+    string erro ="";
+    Emprestimo? emprestimo = sistema.Buscar(id, out erro);
+
+    if (emprestimo == null)
+    {
+        return Results.NotFound(erro);
+    }
+    else
+    {
+        sistema.RiscarNome(emprestimo,out erro);
+    }
+
+    if(erro == "")
+    {
+        return Results.NoContent();
+    }
+    else
+    {
+        return Results.BadRequest(erro);
+    }
+});
+
+//Buscar Emprestimo
+app.MapGet("/Cliente/{id}",(int id) =>
+{
+    string erro ="";
+
+    Emprestimo? emprestimo = sistema.Buscar(id,out erro);
+
+    if(emprestimo == null&&erro!="")
+    {
+        return Results.NotFound(erro);
+    }
+    else
+    {
+        return Results.Ok(emprestimo);
+        
+    }
+});
+
+
 
 
 
@@ -80,11 +205,9 @@ app.MapGet("/", () => "Iniciando");
 app.MapGet("/status", ()=>"Site Rodando");
 
 
-app.MapGet("/AlterarValor", () => "Alterando Valor");
 
-app.MapGet("/PagarJuros", () => "Pagando Juros");
 
-app.MapGet("/RiscarNome", () => "Riscando Nome");
+
 
 app.MapGet("/Sair", () => "Saindo do Sistema");
 

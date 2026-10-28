@@ -26,25 +26,34 @@ class Emprestimo
         
     }
 
-    public void JurosPago(List<Emprestimo> emprestimos){
+    public void JurosPago(List<Emprestimo> emprestimos, out string erro){
         switch(Status){
             case StatusPagamento.Pendente:
-                Status = StatusPagamento.Reagendado;
-                Console.WriteLine("Primeiro reagendamento");
                 MesesReagendado++;
+                Status = StatusPagamento.Reagendado;
+                DataVencimento = DataVencimento.AddMonths(1);
+                Console.WriteLine("Primeiro reagendamento");
+                erro ="";
             break;
+
             case StatusPagamento.Pago:
-                throw new InvalidOperationException("Divida ja quitada");
+                erro = "Juros ja foi pago"; 
+            break;
             
             case StatusPagamento.Reagendado:
                 MesesReagendado++;
+                DataVencimento = DataVencimento.AddMonths(1);
                 Console.WriteLine($"Vai para o {MesesReagendado}Mês");
+                erro ="";
+            break;
+
+            default:
+                erro ="ERRO INESPERADO";
             break;
         }
 
         OrganizarLista(emprestimos);
 
-        DataVencimento = DataVencimento.AddMonths(1);
     }
 
     public void OrganizarLista(List<Emprestimo> emprestimos)
@@ -65,6 +74,22 @@ class Emprestimo
         
         return Cliente.Valor * Cliente.Juros;
     }
+   
+    public void QuitouDivida(out string erro)
+    {
+        switch (Status)
+        {
+            case Emprestimo.StatusPagamento.Pago:
+                erro = "Divida ja paga";
+            break;
+
+            default:
+                erro="";
+                Status = Emprestimo.StatusPagamento.Pago;
+            break;
+        }
+    }
+
     public void AddNumero(string numero){
         Numero = int.Parse(numero);
     }

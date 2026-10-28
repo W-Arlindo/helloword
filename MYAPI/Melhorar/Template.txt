@@ -1,0 +1,7 @@
+metodo PagoDivida
+-Alterar Status para Pago
+
+implementar persistencia de dados
+
+autenticacao de seguranca
+

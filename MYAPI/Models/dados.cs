@@ -2,17 +2,45 @@ using System;
 
 namespace MYAPI.Models;
 
+public record CadastrarCliente
+{
+    public string nome {get;set;} ="";
+    public decimal valor {get;set;}
+    public decimal juros {get;set;}
+}
 class Cliente
 {
     public string? Nome { get; private set; }
     public decimal Valor { get; private set; }
     public decimal Juros { get; private set; }
 
-    public Cliente(string? nome, decimal valor, decimal juros)
+    public Cliente(string? nome, decimal valor, decimal juros,out string erro)
     {
-        Nome=nome;
-        Valor=valor;
-        Juros=juros;
+        if (VerificarNome(nome,out erro))
+        {
+            Nome = nome;
+        }
+        else{
+            throw new ArgumentException("Nome invalido");
+        }
+
+        if (VerificarNumero(valor,out erro))
+        {
+            Valor = valor;
+        }
+        else
+        {
+            throw new ArgumentException("Valor invalido");
+        }
+        
+        if (VerificarNumero(juros,out erro))
+        {
+            Juros = valor / 100;
+        }
+        else
+        {
+            throw new ArgumentException("Juros invalido");
+        }
     }
 
     //Verificar Nome
@@ -38,24 +66,17 @@ class Cliente
     }
 
     //Verificar Numero
-    public bool VerificarNumero(string? v)
+    public bool VerificarNumero(decimal v,out string erro)
     {
-        //Verifica se e null ou spaco
-        if(string.IsNullOrWhiteSpace(v)){
-            return false;
-        }
-        //Verificar se letra
-        else if (!decimal.TryParse(v, out decimal n))
-        {
-            return false;
-        }
         //verifica se e meno ou igual a 0
-        else if(n<=0)
+        if(v<=0)
         {
+            erro = "numero negativo x ";
             return false;
         }
         //retornar verificao
         else{
+            erro = "";
             return true;
         }
     }
@@ -67,7 +88,17 @@ class Cliente
             Nome = n;
         }
         else{
+            return;
+        }
+    }
 
+    public void AlterarValor(decimal n,out string erro)
+    {
+        if (VerificarNumero(n,out erro))
+        {
+            Valor = n;
+        }
+        else{
             return;
         }
     }

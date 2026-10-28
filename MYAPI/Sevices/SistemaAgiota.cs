@@ -117,135 +117,15 @@ public class SistemaAgiota
         return emprestimos;
     }
 
-    internal void CadastrarCliente(Cliente cliente)
+    //add a lista
+    internal void CadastrarCliente(string nome,decimal valor, decimal juros,out string erro)
     {
+        Cliente cliente = new Cliente(nome,valor,juros,out erro);
         emprestimos.Add(new Emprestimo(cliente));
     }
-   
-    /*void adicionarlista(Cliente c)
-    {
-        emprestimos.Add(new Emprestimo(c));
-    }
 
-    public void AlterarNomeCliente()
-    {
-        ListarClientes();
-
-        Emprestimo EmprestimoTemp;
-
-        Console.WriteLine("= = = ALTERAR NOME = = =");
-        try
-        {
-            EmprestimoTemp = Buscar();
-        }
-        catch (FormatException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (InvalidOperationException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-
-        try
-        {
-            EmprestimoTemp.Cliente.AlterarNome(MenuAgiota.ReceberNome());
-        }
-        catch (NullReferenceException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (FormatException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-    }
-
-    public void AlterarValor()
-    {
-        ListarClientes();
-
-        Emprestimo emprestimo;
-
-        Console.WriteLine("= = = ALTERAR VALOR = = =");
-        try
-        {
-            emprestimo = Buscar();
-        }
-        catch (FormatException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (InvalidOperationException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (NullReferenceException ex ){
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-
-        try
-        {
-            emprestimo.Cliente.AlterarValor(MenuAgiota.ReceberValor());
-        }
-        catch(FormatException ex){
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (InvalidOperationException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-    }
-
-    public void QuitouJuros()
-    {
-        Emprestimo e;
-
-        try
-        {
-            e = Buscar();
-        } 
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
-
-        e.JurosPago(emprestimos);
-    }
-    */
-    
     //buscar emprestimo pelo id
-    internal Emprestimo? Buscar(int id)
+    internal Emprestimo? Buscar(int id, out string erro)
     {
         //percorrendo lista de emprestimo
         foreach(Emprestimo emprestimo in emprestimos)
@@ -253,32 +133,48 @@ public class SistemaAgiota
             //verificando id de cada emprestimo
             if (emprestimo.Numero == id)
             {
+                erro = "";
                 return emprestimo;
             }
         }
-       
+    erro ="Emprestimo nao encontrado";
     return null;
     }
 
-    /*public void RiscarNome()
+    //Tirar emprestimo da lista
+    internal void RiscarNome(Emprestimo emprestimo, out string erro)
     {
-        Emprestimo e;
 
-        try
+        switch (emprestimo.Status)
         {
-            e = Buscar();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return;
-        }
+            case Emprestimo.StatusPagamento.Pago:
+                emprestimos.Remove(emprestimo);   
+                erro = "";
+            break;
 
-        emprestimos.Remove(e);
-        e.OrganizarLista(emprestimos);
+            default:
+                erro = "Erro ao remover emprestimo";
+                return;
+        }
+        
+        emprestimo.OrganizarLista(emprestimos);
     }
 
-    public bool FinalizarPrograma()
+    //Quitou a divida completa
+    internal void DividaPaga(Emprestimo emprestimo, out string erro)
+    {
+        switch (emprestimo.Status)
+        {
+            case Emprestimo.StatusPagamento.Pago:
+                erro = "Divida ja paga";
+            break;
+            default:
+                emprestimo.QuitouDivida(out erro);
+                break;
+        }
+    }
+
+    /*public bool FinalizarPrograma()
     {
         List<string> arquivo = ListaSave();
 
