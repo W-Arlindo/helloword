@@ -25,6 +25,11 @@ class Emprestimo
         DataVencimento = DataEmprestimo.AddMonths(1);
         
     }
+    public Emprestimo(int id,Cliente cliente)
+    {
+        Id = id;
+        Cliente=cliente;
+    }
 
     public void JurosPago(List<Emprestimo> emprestimos, out string erro){
         switch(Status){

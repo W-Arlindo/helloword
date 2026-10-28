@@ -34,7 +34,7 @@ class TrazerDados:Dados{
         int save=0;
 
         Cliente clientetemp=new("A",1,1);
-        Emprestimo EmprestimoTemp = new(clientetemp);
+        Emprestimo EmprestimoTemp = new(0,clientetemp);
 
         if((arquivoemprestimos.Length-1)%8==0){
             foreach (var linha in arquivoemprestimos)
@@ -53,7 +53,7 @@ class TrazerDados:Dados{
                 if (save == 1)
                 {
                     clientetemp = new("a", 1,1);
-                    EmprestimoTemp = new(clientetemp);
+                    EmprestimoTemp = new(0,clientetemp);
                 }
 
                 if (save <= 8)
