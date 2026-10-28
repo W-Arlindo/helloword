@@ -10,11 +10,11 @@ public record CadastrarCliente
 }
 class Cliente
 {
-    public string? Nome { get; private set; }
+    public string Nome { get; private set; }
     public decimal Valor { get; private set; }
     public decimal Juros { get; private set; }
 
-    public Cliente(string? nome, decimal valor, decimal juros)
+    public Cliente(string nome, decimal valor, decimal juros)
     {
         string erro;
         if (VerificarNome(nome, out erro))
@@ -36,7 +36,7 @@ class Cliente
         
         if (VerificarNumero(juros,out erro))
         {
-            Juros = valor / 100;
+            Juros = juros / 100;
         }
         else
         {
@@ -82,7 +82,7 @@ class Cliente
         }
     }
 
-    public void AlterarNome(string? n, out string erro)
+    public void AlterarNome(string n, out string erro)
     {
         if (VerificarNome(n, out erro))
         {
@@ -104,13 +104,13 @@ class Cliente
         }
     }
 
-    public void AddNome(string? nome){
+    public void AddNome(string nome){
         Nome = nome;
     }
-    public void AddValor(string? valor){
+    public void AddValor(string valor){
         Valor = decimal.Parse(valor);
     }
-    public void AddJuros(string? juros){
+    public void AddJuros(string juros){
         Juros = decimal.Parse(juros);
     }
 }

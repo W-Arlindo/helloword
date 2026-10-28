@@ -92,7 +92,7 @@ app.MapPut("/Emprestimo/Cliente/AlterarValor/{id}", (int id, decimal valor) =>
 });
 
 //pagou apenas o juros e reagendou para o proximo mes
-app.MapPost("/Emprestimo/PagouJuros/{id}", (int id) =>
+app.MapPut("/Emprestimo/PagouJuros/{id}", (int id) =>
 {
     string erro = "";
     Emprestimo? empres = sistema.Buscar(id,out erro);

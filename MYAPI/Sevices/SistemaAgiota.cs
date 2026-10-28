@@ -6,8 +6,16 @@ namespace MYAPI.Services;
 
 public class SistemaAgiota
 {
+    private List<Emprestimo> emprestimos;
 
-    private List<Emprestimo> emprestimos = new();
+    public SistemaAgiota()
+    {
+        TrazerDados entradaarquivo = new();
+        
+        emprestimos = entradaarquivo.BuscarArquivo();
+
+        organizarlista();
+    }
 
     //Listar Emprestimos
     internal List<Emprestimo> ListarEmprestimo()
@@ -21,6 +29,22 @@ public class SistemaAgiota
     {
         Cliente cliente = new Cliente(nome,valor,juros);
         emprestimos.Add(new Emprestimo(cliente));
+
+        EnviarArquivo();
+    }
+    
+    void organizarlista()
+    {
+        int index = 1;
+
+        foreach(Emprestimo emprestimo in this.emprestimos)
+        {
+            if (emprestimo.Numero != index)
+            {
+                emprestimo.AddNumero(index.ToString());
+            }
+            index++;
+        }
     }
 
     //buscar emprestimo pelo id
@@ -57,6 +81,8 @@ public class SistemaAgiota
         }
         
         emprestimo.OrganizarLista(emprestimos);
+
+        EnviarArquivo();
     }
 
     //Quitou a divida completa
@@ -69,48 +95,23 @@ public class SistemaAgiota
             break;
             default:
                 emprestimo.QuitouDivida(out erro);
+                EnviarArquivo();
                 break;
         }
     }
 
-    /*public bool FinalizarPrograma()
+    
+    //enviar arquivo
+    internal void EnviarArquivo()
     {
-        List<string> arquivo = ListaSave();
+        EnviarArquivo enviarArquivo = new();
 
-        File.WriteAllLines(caminho, arquivo);
+        organizarlista();
 
-        return false;
+        enviarArquivo.Enviar(emprestimos);
+
     }
     
-    List<string> ListaSave()
-    {
-        List<List<string>> emprestimosS = new List<List<string>>();
-        List<string> arquivo = new List<string>();
-
-        foreach (Emprestimo emprestimo in emprestimos)
-        {
-            List<string> e = new List<string>();
-
-            e.Add(emprestimo.Numero.ToString());
-            e.Add(emprestimo.Cliente.Nome);
-            e.Add(emprestimo.Cliente.Valor.ToString());
-            e.Add(emprestimo.Cliente.Juros.ToString());
-            e.Add(emprestimo.Status.ToString());
-            e.Add(emprestimo.DataEmprestimo.ToString("dd/MM/yyyy"));
-            e.Add(emprestimo.DataVencimento.ToString("dd/MM/yyyy"));
-            e.Add(emprestimo.MesesReagendado.ToString());
-
-            emprestimosS.Add(e);
-        }
-        foreach (var emprestimo in emprestimosS)
-        {
-            foreach (string dados in emprestimo)
-            {
-                arquivo.Add(dados);
-            }
-        }
-        return arquivo;
-    }*/
 }
 
 
