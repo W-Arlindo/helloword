@@ -20,10 +20,11 @@ class TrazerDados:Dados{
     
     void organizarlista(List<Emprestimo> emprestimos)
     {
-        string[] arquivoemprestimos = File.ReadAllLines(Caminho);
+        string[] arquivoemprestimos;
 
         if (Verificar(Caminho))
         {
+            arquivoemprestimos = File.ReadAllLines(Caminho);
             Estruturar(emprestimos,arquivoemprestimos);
         }
     }

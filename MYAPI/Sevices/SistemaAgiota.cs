@@ -4,7 +4,7 @@ using MYAPI.Models;
 
 namespace MYAPI.Services;
 
-public class SistemaAgiota
+class SistemaAgiota
 {
     private List<Emprestimo> emprestimos;
 
@@ -30,7 +30,6 @@ public class SistemaAgiota
         Cliente cliente = new Cliente(nome,valor,juros);
         emprestimos.Add(new Emprestimo(cliente));
 
-        EnviarArquivo();
     }
     
     void organizarlista()
@@ -81,8 +80,6 @@ public class SistemaAgiota
         }
         
         emprestimo.OrganizarLista(emprestimos);
-
-        EnviarArquivo();
     }
 
     //Quitou a divida completa
@@ -95,11 +92,9 @@ public class SistemaAgiota
             break;
             default:
                 emprestimo.QuitouDivida(out erro);
-                EnviarArquivo();
                 break;
         }
     }
-
     
     //enviar arquivo
     internal void EnviarArquivo()
@@ -116,15 +111,3 @@ public class SistemaAgiota
 
 
 
-/*
- *  ╔══════════════════════════════╗
- *  ≠======≠======⟦ΛR⟧======≠======≠
- *  ║                              ║
- *  ║  > author  : W-Arlindo       ║
- *  ║  > project : ΛR-OF-001       ║
- *  ║  > name    : Sistema Agiota  ║
- *  ║  > stack   : C# / .NET       ║
- *  ║  > status  : development     ║
- *  ║                              ║
- *  ╚══════════════════════════════╝
- */

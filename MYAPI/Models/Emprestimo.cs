@@ -86,7 +86,7 @@ class Emprestimo
             default:
                 erro="";
                 Status = Emprestimo.StatusPagamento.Pago;
-                Cliente.AddValor("0");Cliente.AddValor("0");
+                Cliente.AddValor("0");Cliente.AddJuros("0");
             break;
         }
     }

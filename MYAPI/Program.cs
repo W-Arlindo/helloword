@@ -16,6 +16,24 @@ app.MapGet("/Emprestimo", () =>
     return sistema.ListarEmprestimo();
 });
 
+//Buscar Emprestimo
+app.MapGet("/Emprestimo/{id}",(int id) =>
+{
+    string erro ="";
+
+    Emprestimo? emprestimo = sistema.Buscar(id,out erro);
+
+    if(emprestimo == null&&erro!="")
+    {
+        return Results.NotFound(erro);
+    }
+    else
+    {
+        return Results.Ok(emprestimo);
+        
+    }
+});
+
 //Cadastrar emprestimo
 app.MapPost("/Emprestimo/Cadastrar",(CadastrarCliente cliente) =>
 {
@@ -27,6 +45,7 @@ app.MapPost("/Emprestimo/Cadastrar",(CadastrarCliente cliente) =>
         return Results.BadRequest(ex.Message);
     }
     
+    sistema.EnviarArquivo();
     return Results.NoContent();
 });
 
@@ -52,6 +71,7 @@ app.MapPut("/Emprestimo/Cliente/AlterarNome/{id}", (int id,string nome) => {
     //retorna o valor alterado
     if(erro == "")
     {
+        sistema.EnviarArquivo();
         return Results.Ok(emprestimo);
     }
     else
@@ -86,6 +106,7 @@ app.MapPut("/Emprestimo/Cliente/AlterarValor/{id}", (int id, decimal valor) =>
     }
     else
     {
+        sistema.EnviarArquivo();
         return Results.Ok(emprestimo);
     }
 
@@ -108,11 +129,12 @@ app.MapPut("/Emprestimo/PagouJuros/{id}", (int id) =>
 
     if(erro == "")
     {
+        sistema.EnviarArquivo();
         return Results.Ok(empres);
     }
     else
     {
-        return Results.NotFound(erro);
+        return Results.BadRequest(erro);
     }
 });
 
@@ -133,6 +155,7 @@ app.MapPost("/Emprestimo/QuitouDivida/{id}", (int id) =>
 
     if (erro == "")
     {
+        sistema.EnviarArquivo();
         return Results.NoContent();
     }
     else
@@ -158,6 +181,7 @@ app.MapDelete("/Emprestimo/Delete/{id}", (int id) =>
 
     if(erro == "")
     {
+        sistema.EnviarArquivo();
         return Results.NoContent();
     }
     else
@@ -166,23 +190,20 @@ app.MapDelete("/Emprestimo/Delete/{id}", (int id) =>
     }
 });
 
-//Buscar Emprestimo
-app.MapGet("/Cliente/{id}",(int id) =>
-{
-    string erro ="";
 
-    Emprestimo? emprestimo = sistema.Buscar(id,out erro);
 
-    if(emprestimo == null&&erro!="")
-    {
-        return Results.NotFound(erro);
-    }
-    else
-    {
-        return Results.Ok(emprestimo);
-        
-    }
-});
+/*
+ *  ╔══════════════════════════════╗
+ *  ≠======≠======⟦ΛR⟧======≠======≠
+ *  ║                              ║
+ *  ║  > author  : W-Arlindo       ║
+ *  ║  > project : ΛR-OF-001       ║
+ *  ║  > name    : Sistema Agiota  ║
+ *  ║  > stack   : C# / .NET       ║
+ *  ║  > status  : development     ║
+ *  ║                              ║
+ *  ╚══════════════════════════════╝
+ */
 
 
 
