@@ -1,6 +1,7 @@
 # Arquivos gerados pelo .NET
 bin/
 obj/
+Melhorar/
 
 # Configurações do Visual Studio
 .vs/
